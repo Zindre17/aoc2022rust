@@ -5,3 +5,10 @@ version = 3
 [[package]]
 name = "dec2"
 version = "0.1.0"
+dependencies = [
+ "input-reader",
+]
+
+[[package]]
+name = "input-reader"
+version = "0.1.0"

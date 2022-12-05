@@ -1,23 +1,7 @@
-use std::{fs::File, io::Read, path::Path};
-
-fn read_file(path: &str) -> String {
-    let path = Path::new(path);
-    let display = path.display();
-
-    let mut file = match File::open(&path) {
-        Err(why) => panic!("Could not open {}: {}", display, why),
-        Ok(file) => file,
-    };
-
-    let mut s = String::new();
-    match file.read_to_string(&mut s) {
-        Err(why) => panic!("Count not read {}: {}", display, why),
-        Ok(_) => return s,
-    }
-}
+use input_reader;
 
 fn part1() {
-    let content = read_file("input");
+    let content = input_reader::read_file("input");
 
     let mut score = 0;
 
@@ -57,7 +41,7 @@ fn part1() {
 }
 
 fn part2() {
-    let content = read_file("input");
+    let content = input_reader::read_file("input");
 
     let mut score = 0;
 
