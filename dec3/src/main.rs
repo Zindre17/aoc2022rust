@@ -1,37 +1,43 @@
-const INPUT: &'static str = include_str!("input");
+use aoc_helper;
 
-fn part1() {
+const INPUT: &'static str = include_str!("input.txt");
+
+fn main() {
+    aoc_helper::print_day("Dec3");
+    aoc_helper::print_solution(1, part1, INPUT);
+    aoc_helper::print_solution(2, part2, INPUT);
+}
+
+fn part1(input: &str) -> Option<i32> {
     let start = 'a' as i32 - 1;
 
     let mut sum = 0;
 
-    for line in INPUT.lines() {
+    for line in input.lines() {
         if line.is_empty() {
             continue;
         }
         let half = line.len() / 2;
-        let firstHalf = line.get(..half);
-        let secondHalf = line.get(half..);
+        let first_half = line.get(..half);
+        let second_half = line.get(half..);
 
-        let mut letterInBoth = None;
-        for letter in firstHalf.unwrap().chars() {
-            if secondHalf.unwrap().contains(letter) {
+        for letter in first_half.unwrap().chars() {
+            if second_half.unwrap().contains(letter) {
                 letter.is_uppercase().then(|| sum += 26);
-                letterInBoth = Some(letter.to_lowercase().collect::<Vec<char>>()[0]);
+                sum += letter.to_lowercase().collect::<Vec<char>>()[0] as i32 - start;
                 break;
             }
         }
-        sum += letterInBoth.unwrap() as i32 - start;
     }
 
-    println!("{}", sum);
+    Some(sum)
 }
 
-fn part2() {
+fn part2(input: &str) -> Option<i32> {
     let start = 'a' as i32 - 1;
 
     let mut sum = 0;
-    let mut lines = INPUT.lines();
+    let mut lines = input.lines();
 
     let mut line = lines.next();
     while line.is_some() {
@@ -46,10 +52,5 @@ fn part2() {
         }
         line = lines.next();
     }
-    println!("{}", sum);
-}
-
-fn main() {
-    part1();
-    part2();
+    Some(sum)
 }
