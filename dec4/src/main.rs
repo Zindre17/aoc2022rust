@@ -1,8 +1,16 @@
-const INPUT: &'static str = include_str!("input");
+use aoc_helper;
 
-fn part1() {
+const INPUT: &'static str = include_str!("input.txt");
+
+fn main() {
+    aoc_helper::print_day("Dec4");
+    aoc_helper::print_solution(1, part1, INPUT);
+    aoc_helper::print_solution(2, part2, INPUT);
+}
+
+fn part1(input: &str) -> Option<i32> {
     let mut fully_contained = 0;
-    for line in INPUT.lines() {
+    for line in input.lines() {
         if line.is_empty() {
             continue;
         }
@@ -25,12 +33,12 @@ fn part1() {
         }
     }
 
-    println!("{}", fully_contained);
+    Some(fully_contained)
 }
 
-fn part2() {
+fn part2(input: &str) -> Option<i32> {
     let mut fully_contained = 0;
-    for line in INPUT.lines() {
+    for line in input.lines() {
         if line.is_empty() {
             continue;
         }
@@ -53,10 +61,5 @@ fn part2() {
         }
     }
 
-    println!("{}", fully_contained);
-}
-
-fn main() {
-    part1();
-    part2();
+    Some(fully_contained)
 }
