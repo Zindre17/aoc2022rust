@@ -5,7 +5,7 @@ const INPUT: &'static str = include_str!("input.txt");
 fn main() {
     aoc_helper::print_day("Dec2");
     aoc_helper::print_solution(1, part1, INPUT);
-    aoc_helper::print_solution(1, part2, INPUT);
+    aoc_helper::print_solution(2, part2, INPUT);
 }
 
 fn part1(input: &str) -> Option<i32> {
