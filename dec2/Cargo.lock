@@ -3,12 +3,12 @@
 version = 3
 
 [[package]]
+name = "aoc-helper"
+version = "0.1.0"
+
+[[package]]
 name = "dec2"
 version = "0.1.0"
 dependencies = [
- "input-reader",
+ "aoc-helper",
 ]
-
-[[package]]
-name = "input-reader"
-version = "0.1.0"

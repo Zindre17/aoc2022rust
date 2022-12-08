@@ -1,11 +1,17 @@
-use input_reader;
+use aoc_helper;
 
-fn part1() {
-    let content = input_reader::read_file("input");
+const INPUT: &'static str = include_str!("input.txt");
 
+fn main() {
+    aoc_helper::print_day("Dec2");
+    aoc_helper::print_solution(1, part1, INPUT);
+    aoc_helper::print_solution(1, part2, INPUT);
+}
+
+fn part1(input: &str) -> Option<i32> {
     let mut score = 0;
 
-    let games = content.split("\r\n");
+    let games = input.lines();
     for game in games {
         if game.is_empty() {
             continue;
@@ -37,15 +43,13 @@ fn part1() {
         }
     }
 
-    println!("{}", score);
+    return Some(score);
 }
 
-fn part2() {
-    let content = input_reader::read_file("input");
-
+fn part2(input: &str) -> Option<i32> {
     let mut score = 0;
 
-    let games = content.split("\r\n");
+    let games = input.lines();
     for game in games {
         if game.is_empty() {
             continue;
@@ -81,10 +85,5 @@ fn part2() {
         }
     }
 
-    println!("{}", score);
-}
-
-fn main() {
-    part1();
-    part2();
+    return Some(score);
 }
