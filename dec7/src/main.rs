@@ -6,6 +6,7 @@ const INPUT: &'static str = include_str!("input.txt");
 fn main() {
     aoc_helper::print_day("Day7");
     aoc_helper::print_solution(1, part1_3, INPUT);
+    aoc_helper::print_solution(2, part2, INPUT);
 }
 
 // fn part1(input: &str) -> Option<i32> {
@@ -150,7 +151,38 @@ fn main() {
 // }
 
 fn part1_3(input: &str) -> Option<i32> {
+    let folder_sizes = build_dir_sizes(input);
+    let mut sum = 0;
+    const MAX: i32 = 100_000;
+    for (_, value) in folder_sizes {
+        if value < MAX {
+            sum += value;
+        }
+    }
+
+    Some(sum)
+}
+
+fn part2(input: &str) -> Option<i32> {
+    let dir_sizes = build_dir_sizes(input);
+    const TOTAL: i32 = 70_000_000;
+    const REQUIRED: i32 = 30_000_000;
+    const MAX: i32 = TOTAL - REQUIRED;
+    let root_size = dir_sizes.get("/").unwrap();
+    let optimal = root_size - MAX;
+    let mut current_best = root_size.clone();
+    for &value in dir_sizes.values() {
+        if value >= optimal && value < current_best {
+            current_best = value;
+        }
+    }
+
+    return Some(current_best);
+}
+
+fn build_dir_sizes(input: &str) -> HashMap<String, i32> {
     let mut folder_sizes = HashMap::<String, i32>::new();
+    folder_sizes.insert("/".to_string(), 0);
     let mut current_path = "/".to_owned();
     for line in input.lines().skip(1) {
         if line.is_empty() {
@@ -221,15 +253,7 @@ fn part1_3(input: &str) -> Option<i32> {
 
         current_path = parent_path;
     }
-    let mut sum = 0;
-    const MAX: i32 = 100_000;
-    for (_, value) in folder_sizes {
-        if value < MAX {
-            sum += value;
-        }
-    }
-
-    Some(sum)
+    return folder_sizes;
 }
 
 // struct Directory {
